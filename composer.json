@@ -1,0 +1,50 @@
+{
+    "name": "alisajjad/php7_api",
+    "description": "Starter code for PHP API",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "alisajjad96",
+            "email": "alisajjad1272@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "PHP7API\\App\\": "app/",
+            "PHP7API\\Components\\": "components/",
+            "PHP7API\\Connection\\": "connection/"
+        },
+        "files": [
+            "includes/trait.php",
+            "includes/interface.php",
+            "includes/common.php"
+        ]
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/"
+        ],
+        "files": [
+            "tests/_files/common.php",
+            "includes/trait.php",
+            "includes/interface.php",
+            "includes/common.php"
+        ]
+    },
+    "require": {
+        "php": ">=7.2.0",
+        "ext-mysqli": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8",
+        "ext-curl": "*"
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "@php -r \"file_exists('configs.php') || copy('configs.example.php', 'configs.php');\""
+        ]
+    }
+}
