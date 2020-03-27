@@ -1,6 +1,6 @@
 {
     "name": "alisajjad/php7_api",
-    "description": "Starter code for PHP API",
+    "description": "A PHP basic starter for single url API development. It provides the basic functionalities with different authorization handles as well as Mysqli Wrapper.",
     "type": "project",
     "license": "MIT",
     "authors": [
