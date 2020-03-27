@@ -87,7 +87,7 @@ interface DB{
      *
      * @return \mysqli|null
      */
-    public function getConnectionObject(): ?mysqli;
+    public function getConnectionObject(): ?\mysqli;
     /**
      * Returns the DB Host
      *
