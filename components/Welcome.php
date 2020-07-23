@@ -13,4 +13,13 @@ class Welcome extends Component{
             'message' => 'success'
         ];
     }
+
+    public function welcomeArgs($request, $route){
+
+        return [
+            'success' => 1,
+            'message' => 'success',
+            'input' => $request
+        ];
+    }
 }

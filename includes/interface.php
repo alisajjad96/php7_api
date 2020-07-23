@@ -93,35 +93,35 @@ interface DB{
      *
      * @return string
      */
-    public function getHost(): string;
+    public function getHost():? string;
     /**
      * Returns the DB Username
      *
      * @return string
      */
-    public function getUsername(): string;
+    public function getUsername():? string;
     /**
      * Returns the DB Password
      *
      * @return string
      */
-    public function getPassword(): string;
+    public function getPassword():? string;
     /**
      * Returns the DB Name
      *
      * @return string
      */
-    public function getDBName(): string;
+    public function getDBName():? string;
     /**
      * Returns the DB Port
      *
      * @return int
      */
-    public function getPort(): int;
+    public function getPort():? int;
     /**
      * Returns the DB Socket
      *
      * @return string
      */
-    public function getSocket(): string;
+    public function getSocket():? string;
 }

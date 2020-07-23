@@ -50,7 +50,7 @@ class MySql implements \PHP7API\DB {
     /**
      * @var int <p>Total Queries Performed</p>
      */
-    public $queriesPerformed;
+    public $queriesPerformed = 0;
     /**
      *
      * @var string
@@ -81,7 +81,7 @@ class MySql implements \PHP7API\DB {
     public static function init(string $host = null, string $user = null,
                                 string $password = null, string $db = null,
                                 string $prefix = null, int $port = null, string $socket = null ){
-        $instance = new MySql();
+        $instance = new MySql($host, $user, $password, $db, $prefix, $port, $socket);
         static::setInstance($instance);
     }
     /**
@@ -275,7 +275,7 @@ class MySql implements \PHP7API\DB {
      *
      * @return string
      */
-    public function getHost(): string{
+    public function getHost():? string{
         return $this->host;
     }
     /**
@@ -283,7 +283,7 @@ class MySql implements \PHP7API\DB {
      *
      * @return string
      */
-    public function getUsername(): string{
+    public function getUsername():? string{
         return $this->user;
     }
     /**
@@ -291,7 +291,7 @@ class MySql implements \PHP7API\DB {
      *
      * @return string
      */
-    public function getPassword(): string{
+    public function getPassword():? string{
         return $this->password;
     }
     /**
@@ -299,7 +299,7 @@ class MySql implements \PHP7API\DB {
      *
      * @return string
      */
-    public function getDBName(): string{
+    public function getDBName():? string{
         return $this->dbName;
     }
     /**
@@ -307,7 +307,7 @@ class MySql implements \PHP7API\DB {
      *
      * @return int
      */
-    public function getPort(): int{
+    public function getPort():? int{
         return $this->port;
     }
     /**
@@ -315,7 +315,7 @@ class MySql implements \PHP7API\DB {
      *
      * @return string
      */
-    public function getSocket(): string{
+    public function getSocket():? string{
         return $this->socket;
     }
 
