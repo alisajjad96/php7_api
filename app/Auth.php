@@ -259,8 +259,9 @@ class Auth{
                 debugPrint('Auth table does not exists');
             elseif ($db->getErrorNum() == 1054):
                 debugPrint('Key column does not exists in database');
+            else:
+                debugPrint($db->getError());
             endif;
-            debugPrint($db->getError());
             return false;
         endif;
 
