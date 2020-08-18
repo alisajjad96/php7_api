@@ -10,6 +10,7 @@ if (!function_exists('getAuthorizationHeader')):
                 $pass = $config['password'] ?? '';
                 return "Authorization: Basic {$user}:{$pass}";
             case \PHP7API\App\Auth::BEARER:
+            case \PHP7API\App\Auth::DATABASE_API:
                 $token = $config['token'] ?? '';
                 return "Authorization: Bearer {$token}";
             case \PHP7API\App\Auth::HEADER:

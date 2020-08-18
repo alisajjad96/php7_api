@@ -44,6 +44,11 @@ class Manager{
         $this->route = $this->requestData['route'] ?? null;
         $this->routes = require_once MAIN_PATH.'routes.php';
         $this->authManager = new Auth();
+
+        if (Config::config('debug', 'environment')):
+            error_reporting(-1);
+            ini_set('display_errors', 'On');
+        endif;
     }
 
     /**

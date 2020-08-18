@@ -46,6 +46,16 @@ return [
          *                  'password' => 'world',
          *                  'realm' => 'host',
          *              ]
+         *      - Database Api Key (Uses Bearer Authorization Header)
+         *          Requires Token
+         *          table_name is the name of database table
+         *          key_name is the field which matches with given Bearer token.
+         *          e.g
+         *              [
+         *                  'type' => 'database_api_key',
+         *                  'table_name' => 'auth_api',
+         *                  'key_field' => 'api_key'
+         *              ]
          *      - Header
          *          Requires key, value
          *          e.g

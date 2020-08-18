@@ -3,6 +3,8 @@
 
 namespace PHP7API\App;
 
+use PHP7API\Connection\MySql;
+
 /**
  * Class Auth
  */
@@ -25,6 +27,7 @@ class Auth{
     public const BEARER = 'bearer';
     public const HEADER = 'header';
     public const DIGEST = 'digest';
+    public const DATABASE_API = 'database_api_key';
 
     /**
      * @var bool Check for validated
@@ -57,6 +60,8 @@ class Auth{
                 return $this->validated = $this->validateHeaderKeyAuth();
             case static::DIGEST:
                 return $this->validated = $this->validateDigestAuth();
+            case static::DATABASE_API:
+                return $this->validated = $this->validateDatabaseAuth();
             case static::NONE:
                 return $this->validated = true;
         endswitch;
@@ -231,5 +236,34 @@ class Auth{
         $valid_response = md5($A1.':'.$token['nonce'].':'.$token['nc'].':'.$token['cnonce'].':'.$token['qop'].':'.$A2);
 
         return $token['response'] === $valid_response;
+    }
+
+    /**
+     * Validates Given Bearer Token from Database
+     * @return bool
+     */
+    protected function validateDatabaseAuth(){
+        $token = $this->getHeaderToken('Bearer');
+
+        $tableName = $this->config->table_name ?? 'auth_api';
+        $keyName = $this->config->key_field ?? 'api_key';
+
+        $db = MySql::instance();
+        $exists = $db->fetch("SELECT `{$keyName}` FROM `{$tableName}` 
+                                WHERE `{$keyName}` = ?",
+            [$token],
+            's'
+        );
+        if (is_null($exists)):
+            if ($db->getErrorNum() == 1146):
+                debugPrint('Auth table does not exists');
+            elseif ($db->getErrorNum() == 1054):
+                debugPrint('Key column does not exists in database');
+            endif;
+            debugPrint($db->getError());
+            return false;
+        endif;
+
+        return !$exists->isEmpty();
     }
 }
